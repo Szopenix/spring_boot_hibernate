@@ -1,29 +1,31 @@
 package com.mycompany.controller;
 
-import com.mycompany.mapper.GameMatchMapper;
 import com.mycompany.model.Champion;
 import com.mycompany.model.GameMatch;
+import com.mycompany.repository.GameMatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/matches")
 public class GameMatchController {
 
     @Autowired
-    private GameMatchMapper gameMatchMapper;
+    private GameMatchRepository gameMatchRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public Iterable<GameMatch> getAllMatches() {
-        return gameMatchMapper.findAll();
+        return gameMatchRepository.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getMatchById/{id}")
     @ResponseBody
-    public GameMatch getMatchById(@PathVariable("id") long id) {
-        return gameMatchMapper.findOneById(id);
+    public Optional<GameMatch> getMatchById(@PathVariable("id") long id) {
+        return gameMatchRepository.findById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/addMatch")
@@ -37,7 +39,7 @@ public class GameMatchController {
         loser.setId(loserId);
         gameMatch.setWinner(winner);
         gameMatch.setLoser(loser);
-        gameMatchMapper.addChampion(gameMatch);
+        gameMatchRepository.save(gameMatch);
         return "Saved";
     }
 
@@ -54,14 +56,14 @@ public class GameMatchController {
         loser.setId(loserId);
         gameMatch.setWinner(winner);
         gameMatch.setLoser(loser);
-        gameMatchMapper.updateChampion(gameMatch);
+        gameMatchRepository.save(gameMatch);
         return "Saved";
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/deleteMatch/{id}")
     @ResponseBody
     public String deleteMatch(@PathVariable("id") long id) {
-        gameMatchMapper.deleteById(id);
+        gameMatchRepository.deleteById(id);
         return "deletedMatch";
     }
 

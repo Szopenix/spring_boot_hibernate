@@ -1,1 +1,1 @@
-ALTER TABLE user ADD COLUMN email VARCHAR(100) not null;
+/*ALTER TABLE user ADD COLUMN email VARCHAR(100) not null;*/

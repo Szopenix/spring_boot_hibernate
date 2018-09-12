@@ -1,15 +1,27 @@
 package com.mycompany.model;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Champion {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
     private double attackPower;
     private double abilityPower;
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    private List<GameMatch> gameMatches;
+
+    @OneToMany(mappedBy = "winner")
+    private List<GameMatch> wonMatches;
+
+    @OneToMany(mappedBy = "loser")
+    private List<GameMatch> lostMatches;
 
     public long getId() {
         return id;
@@ -51,11 +63,19 @@ public class Champion {
         this.user = user;
     }
 
-    public List<GameMatch> getGameMatches() {
-        return gameMatches;
+    public List<GameMatch> getWonMatches() {
+        return wonMatches;
     }
 
-    public void setGameMatches(List<GameMatch> gameMatches) {
-        this.gameMatches = gameMatches;
+    public void setWonMatches(List<GameMatch> wonMatches) {
+        this.wonMatches = wonMatches;
+    }
+
+    public List<GameMatch> getLostMatches() {
+        return lostMatches;
+    }
+
+    public void setLostMatches(List<GameMatch> lostMatches) {
+        this.lostMatches = lostMatches;
     }
 }
