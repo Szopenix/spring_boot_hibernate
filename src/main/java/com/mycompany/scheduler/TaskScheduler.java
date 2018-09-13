@@ -1,5 +1,6 @@
 package com.mycompany.scheduler;
 
+import com.mycompany.repository.GameMatchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.Date;
 public class TaskScheduler {
 
     @Autowired
-    private GameMatchMapper gameMatchMapper;
+    private GameMatchRepository gameMatchMapper;
 
     private static final Logger log = LoggerFactory.getLogger(TaskScheduler.class);
 

@@ -16,7 +16,7 @@ public class User {
     private static final int MIN_CHARACTERS = 8;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
     @Length(min = MIN_CHARACTERS, message = "*Your password must have at least " + MIN_CHARACTERS + " characters")
@@ -36,7 +36,7 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Champion> champions;
 
     public long getId() {

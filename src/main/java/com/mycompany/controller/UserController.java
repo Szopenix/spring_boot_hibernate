@@ -32,7 +32,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, path = "/getUserByName/{userName}")
     @ResponseBody
     public User getUserByName(@PathVariable("userName") String userName) {
-        return userRepository.findByNickName(userName);
+        return userRepository.findByName(userName);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/addUser")
