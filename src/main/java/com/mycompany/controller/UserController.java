@@ -6,8 +6,9 @@ import com.mycompany.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -18,9 +19,11 @@ public class UserController {
     private UserRepository userRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public Collection<User> getAllUsers() {
-        return userRepository.findAll();
+    public ModelAndView getAllUsers(ModelAndView model) {
+        List<User> users = userRepository.findAll();
+        model.addObject("users", users);
+        model.setViewName("users");
+        return model;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getUserById/{userId}")
