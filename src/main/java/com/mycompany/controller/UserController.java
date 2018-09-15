@@ -1,15 +1,17 @@
 package com.mycompany.controller;
 
 
+import com.mycompany.model.Champion;
 import com.mycompany.model.User;
+import com.mycompany.repository.ChampionRepository;
 import com.mycompany.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/users")
@@ -17,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ChampionRepository championRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getAllUsers(ModelAndView model) {
@@ -26,10 +31,45 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/getUserById/{userId}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{userId}")
     @ResponseBody
-    public Optional<User> getUserById(@PathVariable("userId") long userId) {
-        return userRepository.findById(userId);
+    public ModelAndView getUserById(@PathVariable("userId") long userId) {
+        User user = userRepository.findById(userId);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("user");
+        return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{userId}/champions")
+    @ResponseBody
+    public ModelAndView getAllChampions(@PathVariable("userId") Long userId) {
+        Collection<Champion> champions = championRepository.findByUserId(userId);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userId", userId);
+        modelAndView.addObject("champions", champions);
+        modelAndView.setViewName("champions");
+        return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{userId}/addChampion")
+    @ResponseBody
+    public ModelAndView getChampion(@PathVariable("userId") Long userId) {
+        Champion champion = new Champion();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userId", userId);
+        modelAndView.addObject("champion", champion);
+        modelAndView.setViewName("addChampion");
+        return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/{userId}/addChampion")
+    public String addChampion(@ModelAttribute("champion") Champion champion, @PathVariable("userId") long userId) {
+        User user = new User();
+        user.setId(userId);
+        champion.setUser(user);
+        championRepository.save(champion);
+        return "redirect:/users/" + userId;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getUserByName/{userName}")

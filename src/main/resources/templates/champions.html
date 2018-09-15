@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>User Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
+
+    <div class="container" style="margin-top: 25px;">
+        <table class="table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Attack power</th>
+                <th>Ability power</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="champion : ${champions}">
+                <td th:text="${champion.name}">name</td>
+                <td th:text="${champion.attackPower}">attackPower</td>
+                <td th:text="${champion.abilityPower}">abilityPower</td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="margin-top: 15px;">
+            <a class="dropdown-item" th:href="@{'/users/' + ${userId} + '/addChampion'}">Add champion</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
