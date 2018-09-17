@@ -69,6 +69,12 @@ public class UserController {
         user.setId(userId);
         champion.setUser(user);
         championRepository.save(champion);
+        return "redirect:/users/" + userId + "/champions";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{userId}/deleteChampion/{championId}")
+    public String deleteChampion(@PathVariable("userId") long userId, @PathVariable("championId") Long championId) {
+        championRepository.deleteById(championId);
         return "redirect:/users/" + userId;
     }
 

@@ -1,11 +1,11 @@
 package com.mycompany.repository;
 
 import com.mycompany.model.Champion;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collection;
 
-public interface ChampionRepository extends JpaRepository<Champion, Long> {
+public interface ChampionRepository extends CrudRepository<Champion, Long> {
 
     Champion findByName(String name);
     Collection<Champion> findByUserId(long id);

@@ -19,7 +19,7 @@ public class ChampionController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public Collection<Champion> getAllChampions() {
+    public Iterable<Champion> getAllChampions() {
         return championRepository.findAll();
     }
 

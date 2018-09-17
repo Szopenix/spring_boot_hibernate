@@ -33,11 +33,21 @@
                 <td th:text="${champion.name}">name</td>
                 <td th:text="${champion.attackPower}">attackPower</td>
                 <td th:text="${champion.abilityPower}">abilityPower</td>
+                <td>
+                    <a th:href="@{'/users/' + ${userId} + '/deleteChampion/' + ${champion.id}}" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
             </tbody>
         </table>
-        <div style="margin-top: 15px;">
-            <a class="dropdown-item" th:href="@{'/users/' + ${userId} + '/addChampion'}">Add champion</a>
+        <div class="list-group">
+            <a th:href="@{'/users/' + ${userId} + '/addChampion'}"
+               class="list-group-item list-group-item-success">
+                Add champion
+            </a>
+            <a th:href="@{'/users/' + ${userId}}"
+               class="list-group-item list-group-item-success">
+                Go Back
+            </a>
         </div>
     </div>
 
