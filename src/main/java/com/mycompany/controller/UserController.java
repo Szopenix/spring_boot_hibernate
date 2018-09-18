@@ -73,28 +73,25 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{userId}/deleteChampion/{championId}")
-    public String deleteChampion(@PathVariable("userId") long userId, @PathVariable("championId") Long championId) {
+    @ResponseBody
+    public ModelAndView deleteChampion(@PathVariable("userId") Long userId, @PathVariable("championId") Long championId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userId", userId);
+        modelAndView.addObject("championId", championId);
+        modelAndView.setViewName("deleteChampionModal");
+        return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/{userId}/deleteChampion/{championId}")
+    public String deleteChampionModal(@PathVariable("userId") Long userId, @PathVariable("championId") Long championId) {
         championRepository.deleteById(championId);
-        return "redirect:/users/" + userId;
+        return "redirect:/users/" + userId + "/champions";
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/getUserByName/{userName}")
     @ResponseBody
     public User getUserByName(@PathVariable("userName") String userName) {
         return userRepository.findByName(userName);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/addUser")
-    @ResponseBody
-    public String addUser(@RequestParam String nickName,
-                          @RequestParam String firstName,
-                          @RequestParam String lastName,
-                          @RequestParam String email) {
-        User user = new User();
-        user.setName(nickName);
-        user.setEmail(email);
-        userRepository.save(user);
-        return "Saved";
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/updateUser")
