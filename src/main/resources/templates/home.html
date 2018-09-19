@@ -24,13 +24,12 @@
             <div class="panel-heading">
                 <span th:utext="${userName}"></span>
             </div>
-            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
         </div>
     </div>
 
     <form action="#" th:action="@{/home}" method="post" class="form-horizontal" role="form">
-        <button class="btn btn-md btn-danger btn-block" name="redirect"
-                type="Submit">Redirect
+        <button class="btn btn-md btn-success btn-block" name="redirect"
+                type="Submit">Redirect to user panel
         </button>
     </form>
 

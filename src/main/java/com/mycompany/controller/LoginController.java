@@ -1,5 +1,6 @@
 package com.mycompany.controller;
 
+import com.mycompany.model.Role;
 import com.mycompany.model.User;
 import com.mycompany.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Controller
 public class LoginController {
@@ -59,8 +61,16 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        Set<Role> userRoles = user.getRoles();
+        for (Role role : userRoles) {
+            if (role.getRole().equals("ADMIN")) {
+                modelAndView.addObject("userName", "Welcome " + user.getName() + " " + " (" + user.getEmail() + ")");
+                modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+                modelAndView.setViewName("admin");
+                return modelAndView;
+            }
+        }
         modelAndView.addObject("userName", "Welcome " + user.getName() + " " + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
         modelAndView.setViewName("home");
         return modelAndView;
     }

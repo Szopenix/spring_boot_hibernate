@@ -19,32 +19,17 @@
         </button>
     </form>
 
-    <table class="table-bordered" style="margin-top: 25px;">
-        <thead class="table-dark">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>E-mail</th>
-            <th>Active</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.id}">id</td>
-            <td th:text="${user.name}">name</td>
-            <td th:text="${user.email}">email</td>
-            <td th:text="${user.active}">active</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="list-group" style="margin-top: 15px;">
-        <a th:href="@{'/admin'}"
-           class="list-group-item list-group-item-success">
-            Go Back
-        </a>
+    <div class="container">
+        <h2>Add match</h2>
+        <form action="#" th:action="@{'/matches/addMatch'}" th:object="${match}" method="post">
+            <label>Champion winner name : </label>
+            <input type="text" th:field="*{winner.name}"/>
+            <label>Champion loser name : </label>
+            <input type="text" th:field="*{loser.name}"/>
+            <input type="submit" value="Add"/>
+        </form>
     </div>
-</div>
 
+</div>
 </body>
 </html>

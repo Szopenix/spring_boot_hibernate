@@ -1,7 +1,8 @@
 package com.mycompany.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 public class GameMatch {
@@ -10,7 +11,7 @@ public class GameMatch {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    private LocalDateTime matchDate;
+    private Date matchDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Champion winner;
@@ -26,11 +27,11 @@ public class GameMatch {
         this.id = id;
     }
 
-    public LocalDateTime getMatchDate() {
+    public Date getMatchDate() {
         return matchDate;
     }
 
-    public void setMatchDate(LocalDateTime matchDate) {
+    public void setMatchDate(Date matchDate) {
         this.matchDate = matchDate;
     }
 

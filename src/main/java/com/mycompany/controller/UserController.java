@@ -4,6 +4,7 @@ package com.mycompany.controller;
 import com.mycompany.model.Champion;
 import com.mycompany.model.User;
 import com.mycompany.repository.ChampionRepository;
+import com.mycompany.repository.GameMatchRepository;
 import com.mycompany.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class UserController {
 
     @Autowired
     private ChampionRepository championRepository;
+
+    @Autowired
+    private GameMatchRepository gameMatchRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getAllUsers(ModelAndView model) {
@@ -111,6 +115,8 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, path = "/{userId}/deleteChampion/{championId}")
     public String deleteChampionModal(@PathVariable("userId") Long userId,
                                       @PathVariable("championId") Long championId) {
+        gameMatchRepository.deleteByWinnerId(championId);
+        gameMatchRepository.deleteByLoserId(championId);
         championRepository.deleteById(championId);
         return "redirect:/users/" + userId + "/champions";
     }

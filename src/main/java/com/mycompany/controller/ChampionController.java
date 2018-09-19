@@ -20,14 +20,11 @@ public class ChampionController {
     @Autowired
     private ChampionService championService;
 
-    @Autowired
-    private GameMatchRepository gameMatchRepository;
-
     @RequestMapping(method = RequestMethod.GET, path = "/{championId}/{userId}")
     @ResponseBody
     private ModelAndView getMatchHistory(@PathVariable("championId") Long championId,
                                          @PathVariable("userId") Long userId) {
-        Collection<GameMatch> allMatches = championService.getAllMatches(championId);
+        Collection<GameMatch> allMatches = championService.getAllMatchesForChampion(championId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("matches", allMatches);
         modelAndView.addObject("championId", championId);
