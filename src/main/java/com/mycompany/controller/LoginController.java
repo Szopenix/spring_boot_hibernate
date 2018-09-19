@@ -67,7 +67,6 @@ public class LoginController {
 
     @RequestMapping(value = "/home", method = RequestMethod.POST)
     public String redirectToUser() {
-        ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         return "redirect:/users/" + user.getId();

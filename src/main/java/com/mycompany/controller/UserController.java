@@ -72,9 +72,35 @@ public class UserController {
         return "redirect:/users/" + userId + "/champions";
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/{userId}/editChampion/{championId}")
+    @ResponseBody
+    public ModelAndView getEditedChampion(@PathVariable("userId") Long userId,
+                                          @PathVariable("championId") Long championId) {
+        Champion champion = new Champion();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userId", userId);
+        modelAndView.addObject("championId", championId);
+        modelAndView.addObject("champion", champion);
+        modelAndView.setViewName("editChampion");
+        return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/{userId}/editChampion/{championId}")
+    public String editChampion(@ModelAttribute("champion") Champion champion,
+                               @PathVariable("userId") Long userId,
+                               @PathVariable("championId") Long championId) {
+        champion.setId(championId);
+        User user = new User();
+        user.setId(userId);
+        champion.setUser(user);
+        championRepository.save(champion);
+        return "redirect:/users/" + userId + "/champions";
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "/{userId}/deleteChampion/{championId}")
     @ResponseBody
-    public ModelAndView deleteChampion(@PathVariable("userId") Long userId, @PathVariable("championId") Long championId) {
+    public ModelAndView deleteChampion(@PathVariable("userId") Long userId,
+                                       @PathVariable("championId") Long championId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userId", userId);
         modelAndView.addObject("championId", championId);
@@ -83,7 +109,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/{userId}/deleteChampion/{championId}")
-    public String deleteChampionModal(@PathVariable("userId") Long userId, @PathVariable("championId") Long championId) {
+    public String deleteChampionModal(@PathVariable("userId") Long userId,
+                                      @PathVariable("championId") Long championId) {
         championRepository.deleteById(championId);
         return "redirect:/users/" + userId + "/champions";
     }
@@ -92,28 +119,6 @@ public class UserController {
     @ResponseBody
     public User getUserByName(@PathVariable("userName") String userName) {
         return userRepository.findByName(userName);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/updateUser")
-    @ResponseBody
-    public String updateUser(@RequestParam long userId,
-                             @RequestParam String nickName,
-                             @RequestParam String firstName,
-                             @RequestParam String lastName,
-                             @RequestParam String email) {
-        User user = new User();
-        user.setId(userId);
-        user.setName(nickName);
-        user.setEmail(email);
-        userRepository.save(user);
-        return "Updated";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/deleteUser/{id}")
-    @ResponseBody
-    public String deleteUser(@PathVariable("id") long id) {
-        userRepository.deleteById(id);
-        return "deletedUser";
     }
 
 }
