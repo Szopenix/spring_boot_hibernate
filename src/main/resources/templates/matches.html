@@ -32,6 +32,9 @@
             <td th:text="${match.matchDate}">matchDate</td>
             <td th:text="${match.winner.name}"></td>
             <td th:text="${match.loser.name}"></td>
+            <td>
+                <a th:href="@{'/matches/deleteMatch/' + ${match.id}}" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>

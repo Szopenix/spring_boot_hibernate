@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Champion {
+public class Champion implements Comparable<Champion> {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private double attackPower;
@@ -77,5 +77,10 @@ public class Champion {
 
     public void setLostMatches(List<GameMatch> lostMatches) {
         this.lostMatches = lostMatches;
+    }
+
+    @Override
+    public int compareTo(Champion champion) {
+        return (champion.getWonMatches().size() - champion.getLostMatches().size()) - (this.getWonMatches().size() - this.getLostMatches().size());
     }
 }

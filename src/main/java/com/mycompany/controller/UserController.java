@@ -11,8 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(path = "/users")
@@ -127,4 +126,18 @@ public class UserController {
         return userRepository.findByName(userName);
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/{userId}/ranking")
+    @ResponseBody
+    public ModelAndView ranking(@PathVariable("userId") Long userId) {
+
+        List<Champion> champions = championRepository.findAll();
+        Collections.sort(champions);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("userId", userId);
+        modelAndView.addObject("champions", champions);
+        modelAndView.setViewName("ranking");
+        return modelAndView;
+    }
 }

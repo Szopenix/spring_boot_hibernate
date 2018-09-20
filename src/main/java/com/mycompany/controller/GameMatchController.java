@@ -6,10 +6,7 @@ import com.mycompany.repository.ChampionRepository;
 import com.mycompany.repository.GameMatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -54,6 +51,23 @@ public class GameMatchController {
         match.setLoser(loser);
         match.setMatchDate(new Date());
         gameMatchRepository.save(match);
+
+        return "redirect:/matches";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/deleteMatch/{matchId}")
+    @ResponseBody
+    public ModelAndView deleteMatch(@PathVariable("matchId") Long matchId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("matchId", matchId);
+        modelAndView.setViewName("deleteMatchModal");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/deleteMatch/{matchId}")
+    public String deleteMatchModal(@PathVariable("matchId") Long matchId) {
+        gameMatchRepository.deleteById(matchId);
 
         return "redirect:/matches";
     }
