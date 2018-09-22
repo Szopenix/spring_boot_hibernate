@@ -64,15 +64,20 @@ public class LoginController {
         Set<Role> userRoles = user.getRoles();
         for (Role role : userRoles) {
             if (role.getRole().equals("ADMIN")) {
-                modelAndView.addObject("userName", "Welcome " + user.getName() + " " + " (" + user.getEmail() + ")");
+                modelAndView.addObject("userName",user.getName() + " " + " (" + user.getEmail() + ")");
                 modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
                 modelAndView.setViewName("admin");
                 return modelAndView;
             }
         }
-        modelAndView.addObject("userName", "Welcome " + user.getName() + " " + " (" + user.getEmail() + ")");
+        modelAndView.addObject("userName",user.getName() + " " + " (" + user.getEmail() + ")");
         modelAndView.setViewName("home");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/home/international")
+    public String getInternationalPage() {
+        return "international";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.POST)

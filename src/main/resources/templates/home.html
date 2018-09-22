@@ -15,21 +15,21 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span th:utext="${userName}"></span>
+                <span th:utext="#{welcome} + ' ' + ${userName}"></span>
             </div>
         </div>
     </div>
 
     <form action="#" th:action="@{/home}" method="post" class="form-horizontal" role="form">
         <button class="btn btn-md btn-success btn-block" name="redirect"
-                type="Submit">Redirect to user panel
+                type="Submit" th:text="#{redirectToUserPanel}">
         </button>
     </form>
 

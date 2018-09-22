@@ -29,9 +29,4 @@ public class TaskScheduler {
     public void reportTime() {
         log.info("The time is {}", dateFormat.format(new Date()));
     }
-
-    @Scheduled(fixedRate = 60000)
-    public void countMatches() {
-        log.info("Total games on server : " + gameMatchMapper.findAll().size());
-    }
 }
