@@ -1,5 +1,6 @@
 package com.mycompany.config;
 
+import com.mycompany.interceptor.PerformanceInterceptor;
 import com.mycompany.interceptor.RedirectInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
         registry.addInterceptor(new RedirectInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new PerformanceInterceptor());
     }
 
     @Bean
