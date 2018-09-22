@@ -1,5 +1,6 @@
 package com.mycompany.config;
 
+import com.mycompany.interceptor.RedirectInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,6 +32,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(new RedirectInterceptor()).addPathPatterns("/**");
     }
 
     @Bean

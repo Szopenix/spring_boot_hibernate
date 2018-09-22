@@ -75,11 +75,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/home/international")
-    public String getInternationalPage() {
-        return "international";
-    }
-
     @RequestMapping(value = "/home", method = RequestMethod.POST)
     public String redirectToUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

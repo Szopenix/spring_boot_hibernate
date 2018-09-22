@@ -20,7 +20,7 @@ public class TaskScheduler {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 5000)
+/*    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
@@ -28,5 +28,5 @@ public class TaskScheduler {
     @Scheduled(cron = "3/15 * * * * *")
     public void reportTime() {
         log.info("The time is {}", dateFormat.format(new Date()));
-    }
+    }*/
 }
