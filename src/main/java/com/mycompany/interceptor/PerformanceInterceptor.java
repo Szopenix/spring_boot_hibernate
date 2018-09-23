@@ -17,7 +17,7 @@ public class PerformanceInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private HttpSession session;
 
-    private static final long MAX_INACTIVE_SESSION_TIME = 5 * 10000;
+    private static final long MAX_INACTIVE_SESSION_TIME = 60 * 1000;
     private static Logger logger = LoggerFactory.getLogger(PerformanceInterceptor.class);
 
     @Override
@@ -45,7 +45,7 @@ public class PerformanceInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         long startTime = (long) request.getAttribute("executionTime");
         if (System.currentTimeMillis() - startTime > 1000) {
-            logger.warn("Performance issue, request is too long");
+            logger.warn("Performance issue, request is too long. View name : " + modelAndView.getViewName());
         }
     }
 
