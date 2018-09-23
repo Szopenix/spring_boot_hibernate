@@ -15,7 +15,7 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
@@ -24,11 +24,14 @@
             <div class="panel-heading">
                 <span th:utext="#{welcome} + ' ' + ${userName}"></span>
             </div>
-            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+            <p th:if="${adminMessage == true}" class="admin-message-text text-center" th:utext="#{adminMessage}"></p>
+            <p th:unless="${adminMessage == null}" class="admin-message-text text-center"></p>
         </div>
     </div>
 
-    <a th:href="@{'/admin'}" class="btn btn-md btn-success btn-block" name="redirect">Redirect to admin panel</a>
+    <a th:href="@{'/admin'}" class="btn btn-md btn-success btn-block" name="redirect"
+       th:text="#{redirectToAdminPanel}">
+    </a>
 
 </div>
 </body>

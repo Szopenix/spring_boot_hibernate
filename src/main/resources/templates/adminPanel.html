@@ -15,18 +15,18 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
     <div class="list-group" style="margin-top: 15px;">
         <a th:href="@{'/users'}"
-           class="list-group-item list-group-item-success">
-            Manage users
+           class="list-group-item list-group-item-success"
+           th:text="#{manageUsers}">
         </a>
         <a th:href="@{'/matches'}"
-           class="list-group-item list-group-item-success">
-            Manage matches
+           class="list-group-item list-group-item-success"
+           th:text="#{manageMatches}">
         </a>
     </div>
 

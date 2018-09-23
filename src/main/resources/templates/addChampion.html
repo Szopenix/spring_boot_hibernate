@@ -15,20 +15,20 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
     <div class="container">
-        <h2>Add champion</h2>
+        <h2 th:text="#{addChampion}"></h2>
         <form action="#" th:action="@{'/users/' + ${userId} + '/addChampion'}" th:object="${champion}" method="post">
-            <label>Name: </label>
+            <label th:text="#{name} + ': '"></label>
             <input type="text" th:field="*{name}"/>
-            <label>Attack power: </label>
+            <label th:text="#{attackPower} + ': '"></label>
             <input type="text" th:field="*{attackPower}"/>
-            <label>Ability power: </label>
+            <label th:text="#{abilityPower} + ': '"></label>
             <input type="text" th:field="*{abilityPower}"/>
-            <input type="submit" value="Add"/>
+            <input type="submit" th:value="#{add}"/>
         </form>
     </div>
 

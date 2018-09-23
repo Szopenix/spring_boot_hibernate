@@ -15,7 +15,7 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
@@ -23,9 +23,9 @@
         <table class="table-bordered">
             <thead class="table-dark">
             <tr>
-                <th>Name</th>
-                <th>Attack power</th>
-                <th>Ability power</th>
+                <th th:text="#{name}"></th>
+                <th th:text="#{attackPower}"></th>
+                <th th:text="#{abilityPower}"></th>
             </tr>
             </thead>
             <tbody>
@@ -34,25 +34,28 @@
                 <td th:text="${champion.attackPower}">attackPower</td>
                 <td th:text="${champion.abilityPower}">abilityPower</td>
                 <td>
-                    <a th:href="@{'/users/' + ${userId} + '/editChampion/' + ${champion.id}}" class="btn btn-success">Edit</a>
+                    <a th:href="@{'/users/' + ${userId} + '/editChampion/' + ${champion.id}}" class="btn btn-success"
+                       th:text="#{edit}"></a>
                 </td>
                 <td>
-                    <a th:href="@{'/users/' + ${userId} + '/deleteChampion/' + ${champion.id}}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{'/users/' + ${userId} + '/deleteChampion/' + ${champion.id}}" class="btn btn-danger"
+                       th:text="#{delete}"></a>
                 </td>
                 <td>
-                    <a th:href="@{'/champions/' + ${champion.id} + '/' + ${userId}}" class="btn btn-info">Match history</a>
+                    <a th:href="@{'/champions/' + ${champion.id} + '/' + ${userId}}" class="btn btn-info"
+                       th:text="#{matchHistory}"></a>
                 </td>
             </tr>
             </tbody>
         </table>
         <div class="list-group" style="margin-top: 15px;">
             <a th:href="@{'/users/' + ${userId} + '/addChampion'}"
-               class="list-group-item list-group-item-success">
-                Add champion
+               class="list-group-item list-group-item-success"
+               th:text="#{addChampion}">
             </a>
             <a th:href="@{'/users/' + ${userId}}"
-               class="list-group-item list-group-item-success">
-                Go Back
+               class="list-group-item list-group-item-success"
+               th:text="#{goBack}">
             </a>
         </div>
     </div>

@@ -65,7 +65,7 @@ public class LoginController {
         for (Role role : userRoles) {
             if (role.getRole().equals("ADMIN")) {
                 modelAndView.addObject("userName",user.getName() + " " + " (" + user.getEmail() + ")");
-                modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+                modelAndView.addObject("adminMessage", Boolean.TRUE);
                 modelAndView.setViewName("admin");
                 return modelAndView;
             }

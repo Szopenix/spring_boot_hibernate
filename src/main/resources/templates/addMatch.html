@@ -15,18 +15,18 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
     <div class="container">
-        <h2>Add match</h2>
+        <h2 th:text="#{addMatch}"></h2>
         <form action="#" th:action="@{'/matches/addMatch'}" th:object="${match}" method="post">
-            <label>Champion winner name : </label>
+            <label th:text="#{championWinnerName} + ' : '"></label>
             <input type="text" th:field="*{winner.name}"/>
-            <label>Champion loser name : </label>
+            <label th:text="#{championLoserName} + ' : '"></label>
             <input type="text" th:field="*{loser.name}"/>
-            <input type="submit" value="Add"/>
+            <input type="submit" th:value="#{add}"/>
         </form>
     </div>
 

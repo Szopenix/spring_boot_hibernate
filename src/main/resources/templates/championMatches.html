@@ -15,7 +15,7 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
@@ -24,14 +24,14 @@
         <table class="table-bordered">
             <thead class="table-dark">
             <tr>
-                <th>Match Date</th>
-                <th>Winner</th>
-                <th>Loser</th>
+                <th th:text="#{matchDate}"></th>
+                <th th:text="#{winner}"></th>
+                <th th:text="#{loser}"></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="match : ${matches}">
-                <td th:text="${match.matchDate}">matchDate</td>
+                <td th:text="${match.matchDate}"></td>
                 <td th:if="${championId} == ${match.winner.id}" style="background-color: greenyellow"
                     th:text="${match.winner.name}"></td>
                 <td th:unless="${championId} == ${match.winner.id}" th:text="${match.winner.name}"></td>
@@ -44,8 +44,8 @@
 
         <div class="list-group" style="margin-top: 15px;">
             <a th:href="@{'/users/' + ${userId} + '/champions'}"
-               class="list-group-item list-group-item-success">
-                Go Back
+               class="list-group-item list-group-item-success"
+               th:text="#{goBack}">
             </a>
         </div>
 

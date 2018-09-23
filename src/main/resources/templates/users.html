@@ -15,7 +15,7 @@
 
     <form th:action="@{/logout}" method="get">
         <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout
+                type="Submit" th:text="#{logout}">
         </button>
     </form>
 
@@ -23,9 +23,9 @@
         <thead class="table-dark">
         <tr>
             <th>Id</th>
-            <th>Name</th>
+            <th th:text="#{name}"></th>
             <th>E-mail</th>
-            <th>Active</th>
+            <th th:text="#{active}"></th>
         </tr>
         </thead>
         <tbody>
@@ -40,8 +40,8 @@
 
     <div class="list-group" style="margin-top: 15px;">
         <a th:href="@{'/admin'}"
-           class="list-group-item list-group-item-success">
-            Go Back
+           class="list-group-item list-group-item-success"
+           th:text="#{goBack}">
         </a>
     </div>
 </div>
