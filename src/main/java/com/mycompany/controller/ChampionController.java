@@ -1,7 +1,6 @@
 package com.mycompany.controller;
 
 import com.mycompany.model.GameMatch;
-import com.mycompany.repository.GameMatchRepository;
 import com.mycompany.service.ChampionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class ChampionController {
         modelAndView.addObject("matches", allMatches);
         modelAndView.addObject("championId", championId);
         modelAndView.addObject("userId", userId);
-        modelAndView.setViewName("championMatches");
+        modelAndView.setViewName("pages/championMatches");
 
         return modelAndView;
     }

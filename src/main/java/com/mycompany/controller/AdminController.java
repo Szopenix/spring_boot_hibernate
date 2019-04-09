@@ -10,7 +10,7 @@ public class AdminController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String adminPanel() {
-        return "adminPanel";
+        return "pages/adminPanel";
     }
 
 }

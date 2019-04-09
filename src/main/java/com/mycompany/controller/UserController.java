@@ -30,7 +30,7 @@ public class UserController {
     public ModelAndView getAllUsers(ModelAndView model) {
         List<User> users = userRepository.findAll();
         model.addObject("users", users);
-        model.setViewName("users");
+        model.setViewName("pages/users");
         return model;
     }
 
@@ -40,7 +40,7 @@ public class UserController {
         User user = userRepository.findById(userId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("user");
+        modelAndView.setViewName("pages/user");
         return modelAndView;
     }
 
@@ -51,7 +51,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userId", userId);
         modelAndView.addObject("champions", champions);
-        modelAndView.setViewName("champions");
+        modelAndView.setViewName("pages/champions");
         return modelAndView;
     }
 
@@ -62,7 +62,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userId", userId);
         modelAndView.addObject("champion", champion);
-        modelAndView.setViewName("addChampion");
+        modelAndView.setViewName("pages/addChampion");
         return modelAndView;
     }
 
@@ -84,7 +84,7 @@ public class UserController {
         modelAndView.addObject("userId", userId);
         modelAndView.addObject("championId", championId);
         modelAndView.addObject("champion", champion);
-        modelAndView.setViewName("editChampion");
+        modelAndView.setViewName("pages/editChampion");
         return modelAndView;
     }
 
@@ -107,7 +107,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userId", userId);
         modelAndView.addObject("championId", championId);
-        modelAndView.setViewName("deleteChampionModal");
+        modelAndView.setViewName("pages/deleteChampionModal");
         return modelAndView;
     }
 
@@ -137,7 +137,7 @@ public class UserController {
 
         modelAndView.addObject("userId", userId);
         modelAndView.addObject("champions", champions);
-        modelAndView.setViewName("ranking");
+        modelAndView.setViewName("pages/ranking");
         return modelAndView;
     }
 }

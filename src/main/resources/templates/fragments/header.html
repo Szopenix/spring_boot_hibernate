@@ -1,0 +1,10 @@
+<header th:fragment="header"
+        xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav>
+        <form th:action="@{/logout}" method="get">
+            <button class="btn btn-md btn-danger btn-block" name="registration"
+                    type="Submit" th:text="#{logout}">
+            </button>
+        </form>
+    </nav>
+</header>

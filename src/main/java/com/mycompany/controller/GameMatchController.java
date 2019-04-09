@@ -27,7 +27,7 @@ public class GameMatchController {
         Iterable<GameMatch> matches = gameMatchRepository.findAll();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("matches", matches);
-        modelAndView.setViewName("matches");
+        modelAndView.setViewName("pages/matches");
 
         return modelAndView;
     }
@@ -38,7 +38,7 @@ public class GameMatchController {
         GameMatch match = new GameMatch();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("match", match);
-        modelAndView.setViewName("addMatch");
+        modelAndView.setViewName("pages/addMatch");
 
         return modelAndView;
     }
@@ -60,7 +60,7 @@ public class GameMatchController {
     public ModelAndView deleteMatch(@PathVariable("matchId") Long matchId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("matchId", matchId);
-        modelAndView.setViewName("deleteMatchModal");
+        modelAndView.setViewName("pages/deleteMatchModal");
 
         return modelAndView;
     }

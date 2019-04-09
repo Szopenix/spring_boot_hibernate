@@ -23,7 +23,7 @@ public class LoginController {
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String login() {
-        return "/login";
+        return "/pages/login";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -31,7 +31,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
+        modelAndView.setViewName("pages/registration");
         return modelAndView;
     }
 
@@ -44,15 +44,12 @@ public class LoginController {
                     .rejectValue("email", "error.user",
                             "There is already a user registered with the email provided");
         }
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registration");
-        } else {
+        if (!bindingResult.hasErrors()) {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
-
         }
+        modelAndView.setViewName("pages/registration");
         return modelAndView;
     }
 
@@ -66,12 +63,12 @@ public class LoginController {
             if (role.getRole().equals("ADMIN")) {
                 modelAndView.addObject("userName",user.getName() + " " + " (" + user.getEmail() + ")");
                 modelAndView.addObject("adminMessage", Boolean.TRUE);
-                modelAndView.setViewName("admin");
+                modelAndView.setViewName("pages/admin");
                 return modelAndView;
             }
         }
         modelAndView.addObject("userName",user.getName() + " " + " (" + user.getEmail() + ")");
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("pages/home");
         return modelAndView;
     }
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
 
 <head>
     <title>User Page</title>
@@ -11,24 +13,20 @@
 </head>
 
 <body>
-<div class="container">
-
-    <form th:action="@{/logout}" method="get">
-        <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit" th:text="#{logout}">
-        </button>
-    </form>
+<div layout:fragment="content" class="container">
 
     <div class="container">
-        <h2 th:text="#{addChampion}"></h2>
-        <form action="#" th:action="@{'/users/' + ${userId} + '/addChampion'}" th:object="${champion}" method="post">
+        <h2 th:text="#{editChampion}"></h2>
+        <form action="#" th:action="@{'/users/' + ${userId} + '/editChampion/' + ${championId}}"
+              th:object="${champion}"
+              method="post">
             <label th:text="#{name} + ': '"></label>
             <input type="text" th:field="*{name}"/>
             <label th:text="#{attackPower} + ': '"></label>
             <input type="text" th:field="*{attackPower}"/>
             <label th:text="#{abilityPower} + ': '"></label>
             <input type="text" th:field="*{abilityPower}"/>
-            <input type="submit" th:value="#{add}"/>
+            <input type="submit" th:value="#{edit}"/>
         </form>
     </div>
 
